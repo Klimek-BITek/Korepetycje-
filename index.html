@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Korepetycje z matematyki</title>
+  <style>
+    :root {
+  --primary-color: #0066cc;
+  --secondary-color: #ffffff;
+  --background-color: #f7f9fc;
+  --text-color: #333;
+  --accent-color: #ffcc00;
+  --highlight-color: #ffdd57;
+  --button-hover: #004d99;
+  --shadow-light: rgba(0, 0, 0, 0.05);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  position: relative;
+  min-height: 100vh;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(0, 102, 204, 0.07) 0%, transparent 25%),
+    radial-gradient(circle at 80% 10%, rgba(255, 204, 0, 0.06) 0%, transparent 30%),
+    radial-gradient(circle at 50% 80%, rgba(0, 102, 204, 0.04) 0%, transparent 40%);
+  background-repeat: no-repeat;
+  background-size: 300px 300px, 400px 400px, 350px 350px;
+}
+
+/* Matematyczne tło - SVG jako data URI */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><text x='10' y='40' font-size='20' fill='rgba(0,102,204,0.05)' font-family='Arial'>&#x221E;</text><text x='60' y='70' font-size='25' fill='rgba(255,204,0,0.05)' font-family='Arial'>&#x03C0;</text><text x='30' y='85' font-size='18' fill='rgba(0,102,204,0.05)' font-family='Arial'>&#x221A;</text></svg>");
+  background-repeat: repeat;
+  opacity: 0.08;
+  z-index: 0;
+}
+
+/* Nadpis i header */
+header {
+  background-color: #0d70d9; /* zachowujemy bazowy niebieski kolor */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><text x='10' y='40' font-size='28' fill='rgba(255,255,255,0.15)' font-family='Arial'>&#x03C0;</text><text x='60' y='40' font-size='28' fill='rgba(255,255,255,0.15)' font-family='Arial'>&#x221A;</text><text x='30' y='90' font-size='28' fill='rgba(255,255,255,0.15)' font-family='Arial'>∑</text><text x='80' y='90' font-size='28' fill='rgba(255,255,255,0.15)' font-family='Arial'>∞</text></svg>");
+  background-repeat: repeat;
+  background-size: 120px 120px;
+  color: rgb(255, 255, 255);
+  padding: 2rem 1rem;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  position: relative;
+  z-index: 10;
+}
+
+
+header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Nawigacja */
+nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  background-color: var(--secondary-color);
+  box-shadow: 0 4px 6px var(--shadow-light);
+  position: relative;
+  z-index: 10;
+}
+
+nav button {
+  padding: 0.75rem 1.5rem;
+  margin: 0.5rem;
+  border: none;
+  background: linear-gradient(135deg, var(--primary-color), var(--button-hover));
+  color: var(--secondary-color);
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 3px 8px rgba(0, 102, 204, 0.3);
+}
+
+nav button:hover, nav button:focus {
+  background: linear-gradient(135deg, var(--button-hover), #003366);
+  transform: scale(1.1);
+  box-shadow: 0 5px 15px rgba(0, 102, 204, 0.5);
+  outline: none;
+}
+
+/* Główna treść */
+main {
+  max-width: 900px;
+  margin: 2rem auto 4rem;
+  padding: 2rem 2.5rem;
+  background: var(--secondary-color);
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 10;
+}
+
+/* Sekcje */
+section {
+  display: none;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+section.active {
+  display: block;
+}
+
+/* Efekt fadeIn */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+
+h2 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+ul {
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+ul li {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+/* Akcentowanie najważniejszych punktów */
+strong {
+  color: var(--accent-color);
+}
+.experience-section {
+  background: #f9fbff url('math-bg-light.png') no-repeat center;
+  background-size: cover;
+  padding: 3rem 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 64, 128, 0.1);
+  max-width: 900px;
+  margin: 3rem auto;
+  color: #002244;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.experience-section h2 {
+  text-align: center;
+  font-size: 2.2rem;
+  color: #004080;
+  margin-bottom: 2rem;
+  border-bottom: 4px solid #ffcc00;
+  display: inline-block;
+  padding-bottom: 0.4rem;
+}
+
+.experience-section p {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  color: #1a2b6c;
+}
+
+.highlighted-call {
+  background-color: #e6f0ff;
+  border-left: 5px solid #004080;
+  padding: 1rem 1.2rem;
+  font-weight: bold;
+  color: #003366;
+  border-radius: 8px;
+}
+
+.call-to-action {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  background-color: #e0ecff; /* jasnoniebieskie tło */
+  color: #cc9900; /* ciemniejsze złoto */
+  padding: 1rem;
+  border-radius: 100px;
+  border: 2px solid #b8b5ab;
+  box-shadow: 0 2px 8px rgba(204, 153, 0, 0.15);
+}
+
+
+
+/* Kontakt */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-size: 1.1rem;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--primary-color);
+  font-weight: 700;
+  user-select: all;
+}
+
+.contact-icon {
+  font-size: 1.8rem;
+}
+
+/* Stopka */
+footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #f0f0f0;
+  font-size: 0.9rem;
+  color: #666;
+  border-top: 1px solid #ddd;
+  margin-top: 2rem;
+  position: relative;
+  z-index: 10;
+}
+
+/* Responsywność */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 2rem;
+  }
+
+  nav button {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.95rem;
+  }
+
+  main {
+    padding: 1.5rem 1.8rem;
+    margin: 1rem;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Korepetycje z Matematyki</h1>
+    <p>Pasja. Wyniki. Zrozumienie.</p>
+  </header>
+
+  <nav>
+    <button onclick="showSection('oMnie')">O mnie</button>
+    <button onclick="showSection('dlaczego')">Dlaczego warto?</button>
+    <button onclick="showSection('doswiadczenie')">Doświadczenie</button>
+    <button onclick="showSection('oferta')">Oferta</button>
+    <button onclick="showSection('kontakt')">Kontakt</button>
+  </nav>
+
+  <main>
+    <section id="oMnie" class="active">
+      <h2>O mnie</h2>
+      <p>
+        Nazywam się Jakub. Ukończyłem najlepsze liceum w mieście z oceną celującą (6) z matematyki oraz świadectwem z paskiem. Brałem udział w licznych konkursach matematycznych, a moja matura mówi sama za siebie.<br> Jestem osobą, która szybko nawiązuje znajomości i z łatwością utrzymuje kontakty, co sprawia, że moja współpraca z uczniami jest efektywna i przyjemna. Potrafię motywować i budować pozytywną atmosferę podczas lekcji, dzięki czemu nauka staje się ciekawa i angażująca. Zawsze stawiam na indywidualne podejście – rozumiem, że każdy uczy się inaczej, dlatego dostosowuję metody do potrzeb moich podopiecznych
+      </p>
+      <ul>
+        <li>Matematyka podstawowa – <strong>100%</strong></li>
+        <li>Matematyka rozszerzona – <strong>82%</strong></li>
+      </ul>
+      <p>
+        Matematyka to moja pasja – i z przyjemnością pomogę Ci ją zrozumieć!
+      </p>
+    </section>
+
+    <section id="dlaczego">
+      <h2>Dlaczego warto?</h2>
+      <ul>
+        <li>Jasne i spokojne tłumaczenie trudnych zagadnień</li>
+        <li>Indywidualne podejście do każdego ucznia</li>
+        <li>Szybko nawiązuję kontakt i tworzę przyjazną atmosferę</li>
+        <li>Pomagam zdobywać nie tylko lepsze oceny, ale też pewność siebie</li>
+      </ul>
+      <p>
+        Jeśli czujesz, że matematyka to dla Ciebie problem – pozwól, że pokażę Ci, że może być zupełnie inaczej.
+      </p>
+    </section>
+
+    <section id="doswiadczenie" class="experience-section">
+  <h2>Doświadczenie</h2>
+  <p>Matematyka to moja pasja od zawsze — to nie tylko przedmiot, ale sposób myślenia, który wprowadzam do każdej lekcji. Jestem młody, pełen energii i świeżych pomysłów, a przede wszystkim skuteczny! Wystarczy spojrzeć na sukcesy moich uczniów, by przekonać się, że potrafię zmienić trudności w realne wyniki.</p>
+
+  <p>Już teraz mogę pochwalić się gronem zadowolonych podopiecznych, którzy dzięki mojej pomocy nie tylko zdali szkołę, ale osiągnęli wyniki, o jakich wcześniej mogli tylko marzyć. To dzięki indywidualnemu podejściu, cierpliwości i motywacji, którą przekazuję, moi uczniowie zdobywają pewność siebie i naprawdę rozumieją matematykę.</p>
+
+  <p class="highlighted-call">Jeśli chcesz przełamać swoje bariery, poprawić oceny i poczuć, że matematyka to wcale nie czarna magia, tylko fascynująca przygoda — zapraszam! Wspólnie osiągniemy sukces, który zostanie z Tobą na lata.</p>
+
+  <p class="call-to-action">Nie czekaj, zacznij już dziś — bo najlepszy czas na zmiany to teraz!</p>
+</section>
+
+
+    <section id="oferta">
+      <h2>Oferta</h2>
+      <p>Korepetycje prowadzę w dwóch formach:</p>
+      <ul>
+        <li><strong>Online – 60 zł / godzina</strong></li>
+        <li><strong>Offline – 80 zł / godzina</strong></li>
+      </ul>
+      <p>
+        Zajęcia stacjonarne dostępne są <strong>tylko na terenie Płocka i okolic</strong>. Jeśli mieszkasz w pobliżu – chętnie spotkam się osobiście. W pozostałych przypadkach zapraszam na efektywne i wygodne zajęcia online.
+      </p>
+    </section>
+
+    <section id="kontakt">
+      <h2>Kontakt</h2>
+      <div class="contact-info">
+        <div class="contact-item">
+          <span class="contact-icon">📞</span>
+          <a href="tel:+48123456789" aria-label="Numer telefonu">+48 531 140 202</a>
+        </div>
+        <div class="contact-item">
+          <span class="contact-icon">💬</span>
+          <a href="https://www.facebook.com/jakub.klimek.7921" target="_blank" rel="noopener" aria-label="Messenger">Messenger</a>
+        </div>
+        <div class="contact-item">
+          <span class="contact-icon">✉️</span>
+          <a href="jakubklimek207@gmail.com" aria-label="Email">jakubklimek207@gmail.com</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Korepetycje z Matematyki – Wszystkie prawa zastrzeżone
+  </footer>
+
+  <script>
+    function showSection(id) {
+      const sections = document.querySelectorAll("main section");
+      sections.forEach(section => section.classList.remove("active"));
+      document.getElementById(id).classList.add("active");
+    }
+  </script>
+</body>
+</html>
