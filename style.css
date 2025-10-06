@@ -1,12 +1,18 @@
 :root {
   --primary-color: #0066cc;
+  --primary-darker: #004080;
+  --primary-darkest: #003366;
   --secondary-color: #ffffff;
   --background-color: #f7f9fc;
   --text-color: #333;
+  --text-light: #1a2b6c;
   --accent-color: #ffcc00;
-  --highlight-color: #ffdd57;
+  --accent-darker: #cc9900;
+  --highlight-bg: #e6f0ff;
   --button-hover: #004d99;
   --shadow-light: rgba(0, 0, 0, 0.05);
+  --shadow-medium: rgba(0, 0, 0, 0.1);
+  --shadow-dark: rgba(0, 0, 0, 0.2);
 }
 
 * {
@@ -16,12 +22,12 @@
 }
 
 body {
+  position: relative;
+  min-height: 100vh;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: var(--background-color);
   color: var(--text-color);
   line-height: 1.6;
-  position: relative;
-  min-height: 100vh;
   background-image: 
     radial-gradient(circle at 10% 20%, rgba(0, 102, 204, 0.07) 0%, transparent 25%),
     radial-gradient(circle at 80% 10%, rgba(255, 204, 0, 0.06) 0%, transparent 30%),
@@ -30,11 +36,13 @@ body {
   background-size: 300px 300px, 400px 400px, 350px 350px;
 }
 
-/* Matematyczne tło - SVG jako data URI */
 body::before {
   content: "";
   position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
   background-image: url("data:image/svg+xml;utf8,<svg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><text x='10' y='40' font-size='20' fill='rgba(0,102,204,0.05)' font-family='Arial'>&#x221E;</text><text x='60' y='70' font-size='25' fill='rgba(255,204,0,0.05)' font-family='Arial'>&#x03C0;</text><text x='30' y='85' font-size='18' fill='rgba(0,102,204,0.05)' font-family='Arial'>&#x221A;</text></svg>");
   background-repeat: repeat;
@@ -42,68 +50,72 @@ body::before {
   z-index: 0;
 }
 
-/* Nadpis i header */
+/* Header */
 header {
-  background: linear-gradient(120deg, var(--primary-color), #0056b3);
-  color: var(--secondary-color);
-  padding: 2rem 1rem;
-  text-align: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   position: relative;
   z-index: 10;
+  padding: 2rem 1rem;
+  text-align: center;
+  color: var(--secondary-color);
+  background-color: var(--primary-color);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><text x='10' y='40' font-size='28' fill='rgba(255,255,255,0.15)' font-family='Arial'>&#x03C0;</text><text x='60' y='40' font-size='28' fill='rgba(255,255,255,0.15)' font-family='Arial'>&#x221A;</text><text x='30' y='90' font-size='28' fill='rgba(255,255,255,0.15)' font-family='Arial'>∑</text><text x='80' y='90' font-size='28' fill='rgba(255,255,255,0.15)' font-family='Arial'>∞</text></svg>");
+  background-repeat: repeat;
+  background-size: 120px 120px;
+  box-shadow: 0 4px 10px var(--shadow-dark);
 }
 
 header h1 {
-  font-size: 2.5rem;
   margin-bottom: 0.5rem;
+  font-size: 2.5rem;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-/* Nawigacja */
+/* Navigation */
 nav {
+  position: relative;
+  z-index: 10;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   background-color: var(--secondary-color);
   box-shadow: 0 4px 6px var(--shadow-light);
-  position: relative;
-  z-index: 10;
 }
 
 nav button {
   padding: 0.75rem 1.5rem;
   margin: 0.5rem;
   border: none;
+  border-radius: 30px;
   background: linear-gradient(135deg, var(--primary-color), var(--button-hover));
   color: var(--secondary-color);
-  border-radius: 30px;
-  cursor: pointer;
-  font-weight: 700;
   font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
   transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
   box-shadow: 0 3px 8px rgba(0, 102, 204, 0.3);
 }
 
-nav button:hover, nav button:focus {
-  background: linear-gradient(135deg, var(--button-hover), #003366);
+nav button:hover,
+nav button:focus {
+  background: linear-gradient(135deg, var(--button-hover), var(--primary-darkest));
   transform: scale(1.1);
   box-shadow: 0 5px 15px rgba(0, 102, 204, 0.5);
   outline: none;
 }
 
-/* Główna treść */
+/* Main Content */
 main {
+  position: relative;
+  z-index: 10;
   max-width: 900px;
   margin: 2rem auto 4rem;
   padding: 2rem 2.5rem;
   background: var(--secondary-color);
   border-radius: 20px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  position: relative;
-  z-index: 10;
+  box-shadow: 0 10px 25px var(--shadow-medium);
 }
 
-/* Sekcje */
+/* Sections */
 section {
   display: none;
   animation: fadeIn 0.5s ease forwards;
@@ -113,17 +125,16 @@ section.active {
   display: block;
 }
 
-/* Efekt fadeIn */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px);}
-  to { opacity: 1; transform: translateY(0);}
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 h2 {
-  color: var(--primary-color);
   margin-bottom: 1rem;
   font-size: 1.8rem;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  color: var(--primary-color);
+  text-shadow: 1px 1px 2px var(--shadow-light);
 }
 
 ul {
@@ -136,12 +147,61 @@ ul li {
   font-weight: 600;
 }
 
-/* Akcentowanie najważniejszych punktów */
 strong {
   color: var(--accent-color);
 }
 
-/* Kontakt */
+/* Experience Section */
+.experience-section {
+  max-width: 900px;
+  margin: 3rem auto;
+  padding: 3rem 2rem;
+  color: var(--primary-darker);
+  background: #f9fbff url('math-bg-light.png') no-repeat center;
+  background-size: cover;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 64, 128, 0.1);
+}
+
+.experience-section h2 {
+  display: inline-block;
+  padding-bottom: 0.4rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-size: 2.2rem;
+  color: var(--primary-darker);
+  border-bottom: 4px solid var(--accent-color);
+}
+
+.experience-section p {
+  margin-bottom: 1.5rem;
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: var(--text-light);
+}
+
+.highlighted-call {
+  padding: 1rem 1.2rem;
+  font-weight: bold;
+  color: var(--primary-darkest);
+  background-color: var(--highlight-bg);
+  border-left: 5px solid var(--primary-darker);
+  border-radius: 8px;
+}
+
+.call-to-action {
+  padding: 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  color: var(--accent-darker);
+  background-color: var(--highlight-bg);
+  border: 2px solid #b8b5ab;
+  border-radius: 100px;
+  box-shadow: 0 2px 8px rgba(204, 153, 0, 0.15);
+}
+
+/* Contact */
 .contact-info {
   display: flex;
   flex-direction: column;
@@ -153,8 +213,8 @@ strong {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  color: var(--primary-color);
   font-weight: 700;
+  color: var(--primary-color);
   user-select: all;
 }
 
@@ -162,20 +222,20 @@ strong {
   font-size: 1.8rem;
 }
 
-/* Stopka */
+/* Footer */
 footer {
-  text-align: center;
-  padding: 1rem;
-  background-color: #f0f0f0;
-  font-size: 0.9rem;
-  color: #666;
-  border-top: 1px solid #ddd;
-  margin-top: 2rem;
   position: relative;
   z-index: 10;
+  padding: 1rem;
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #666;
+  background-color: #f0f0f0;
+  border-top: 1px solid #ddd;
 }
 
-/* Responsywność */
+/* Responsiveness */
 @media (max-width: 768px) {
   header h1 {
     font-size: 2rem;
@@ -187,7 +247,7 @@ footer {
   }
 
   main {
-    padding: 1.5rem 1.8rem;
     margin: 1rem;
+    padding: 1.5rem 1.8rem;
   }
 }
